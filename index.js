@@ -26,7 +26,7 @@ const replaceTemplate = (temp, product) => {
   output = output.replace(/{%ID%}/g, product.id);
 
   if (!product.organic)
-    output = temp.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+    output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic");
 
   return output;
 };
@@ -59,6 +59,7 @@ const server = http.createServer((req, res) => {
     const cardsHtml = dataObj
       .map((el) => replaceTemplate(tempCards, el))
       .join("");
+    console.log(cardsHtml);
     const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHtml);
     res.end(output);
 
